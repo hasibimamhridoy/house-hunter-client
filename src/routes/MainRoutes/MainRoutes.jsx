@@ -14,6 +14,7 @@ import AddANewHouse from '../../pages/Dashboard/Owner/AddANewHouse';
 import MenageBookingsOwner from '../../pages/Dashboard/Owner/MenageBookingsOwner';
 import Contact from '../../pages/Contact/Contact';
 import Houses from '../../pages/Houses/Houses';
+import UpdateHouse from '../../pages/Dashboard/Owner/updateHouse';
 
 
 const MainRoutes = createBrowserRouter([
@@ -66,6 +67,11 @@ const MainRoutes = createBrowserRouter([
             {
                 path:'/dashboard/add-new-house',
                 element:<AddANewHouse></AddANewHouse>
+            },
+            {
+                path:'/dashboard/update/house/:id',
+                element:<UpdateHouse></UpdateHouse>,
+                loader : ({params})=>fetch(`http://localhost:5000/api/single-house/${params.id}`)
             },
             {
                 path:'/dashboard/menage-bookings-owner',

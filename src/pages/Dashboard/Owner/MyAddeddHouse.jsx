@@ -3,6 +3,7 @@ import useMyHouses from "../../../hooks/useMyHouses/useMyHouses";
 import { roomsSize } from "../../../datas/GeneralInfo/generalInfo";
 import { deleteToMyHouse } from "../../../api/removeHouse";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const MyAddedHouse = () => {
   console.log("Kire");
@@ -73,12 +74,13 @@ const MyAddedHouse = () => {
                 <td className="px-6 py-4">{house_room_size}</td>
                 <td className="px-6 py-4">{availability_date}</td>
                 <td className="px-6 py-4">
+                  <Link to={`/dashboard/update/house/${_id}`}>
                   <a
-                    href="#"
+                    
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Edit
-                  </a>
+                  </a></Link>
                 </td>
                 <td className="px-6 py-4 cursor-pointer">
                   <a

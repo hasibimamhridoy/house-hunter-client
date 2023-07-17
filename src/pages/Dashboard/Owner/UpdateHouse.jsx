@@ -1,20 +1,38 @@
 import React, { useState } from "react";
+import { updateHouseFn } from "../../../api/updateHouse";
+import swal from "sweetalert";
+import useAuth from "../../../hooks/useAuth";
+import { imageUpload } from "../../../api/imageUpload";
+import { useLoaderData } from "react-router-dom";
 import {
   bedrooms,
   cities,
   roomsSize,
 } from "../../../datas/GeneralInfo/generalInfo";
-import useAuth from "../../../hooks/useAuth";
-import { imageUpload } from "../../../api/imageUpload";
-import { addHouse } from "../../../api/addHouse";
-import swal from "sweetalert";
 
-const AddANewHouse = () => {
+const UpdateHouse = () => {
   const { user, loading } = useAuth();
-
+  const updateHouse = useLoaderData();
+  console.log(updateHouse);
+  const {
+    _id,
+    house_name,
+    house_address,
+    house_city,
+    rent_per_month,
+    house_room_size,
+    house_bedRoom,
+    house_bathRoom,
+    phone_number,
+    availability_date,
+    description,
+    photo_url,
+    userInfo,
+  } = updateHouse;
 
   const [addLoading, setAddLoading] = useState(false);
-  const handleAddHouse = (e) => {
+
+  const handleUpdateHouse = (e) => {
     setAddLoading(true);
     e.preventDefault();
     const form = e.target;
@@ -33,7 +51,7 @@ const AddANewHouse = () => {
     imageUpload(image).then((res) => {
       const image = res.data.url;
 
-      const newProduct = {
+      const updateHouseInformation = {
         house_name,
         house_address,
         house_city,
@@ -47,8 +65,9 @@ const AddANewHouse = () => {
         photo_url: image,
         userInfo: user,
       };
-      addHouse(newProduct).then((res) => {
-        swal("Good!", "New House Added Succesfully!", "success");
+      console.log(_id);
+      updateHouseFn(_id, updateHouseInformation).then((res) => {
+        swal("Good!", "House Updated Succesfully!", "success");
         // form.reset();
         setAddLoading(false);
       });
@@ -62,7 +81,7 @@ const AddANewHouse = () => {
           <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
             Add a new House
           </h2>
-          <form onSubmit={handleAddHouse}>
+          <form onSubmit={handleUpdateHouse}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="sm:col-span-2">
                 <label
@@ -72,6 +91,7 @@ const AddANewHouse = () => {
                   House Name
                 </label>
                 <input
+                  defaultValue={house_name}
                   type="text"
                   name="name"
                   id="name"
@@ -88,6 +108,7 @@ const AddANewHouse = () => {
                   Address
                 </label>
                 <input
+                  defaultValue={house_address}
                   type="text"
                   name="address"
                   id="address"
@@ -105,6 +126,7 @@ const AddANewHouse = () => {
                   City
                 </label>
                 <select
+                  defaultValue={house_city}
                   id="city"
                   name="city"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -126,6 +148,7 @@ const AddANewHouse = () => {
                   Rent Per Month
                 </label>
                 <input
+                  defaultValue={rent_per_month}
                   type="number"
                   name="price"
                   id="price"
@@ -143,6 +166,7 @@ const AddANewHouse = () => {
                   Room Size
                 </label>
                 <select
+                  defaultValue={house_room_size}
                   id="roomSize"
                   name="roomSize"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -164,6 +188,7 @@ const AddANewHouse = () => {
                   Bed Room
                 </label>
                 <select
+                  defaultValue={house_bedRoom}
                   id="bedRoom"
                   name="bedRoom"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -184,6 +209,7 @@ const AddANewHouse = () => {
                   Bath Room
                 </label>
                 <select
+                  defaultValue={house_bathRoom}
                   id="BathRoom"
                   name="bathRoom"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -205,6 +231,7 @@ const AddANewHouse = () => {
                   Phone Number
                 </label>
                 <input
+                  defaultValue={phone_number}
                   type="tel"
                   name="phone"
                   id="phone"
@@ -228,6 +255,7 @@ const AddANewHouse = () => {
                   aria-describedby="houseImage_help"
                   id="houseImage"
                   type="file"
+                  required
                 />
               </div>
 
@@ -240,6 +268,7 @@ const AddANewHouse = () => {
                 </label>
 
                 <input
+                  defaultValue={availability_date}
                   type="date"
                   name="date"
                   id="date"
@@ -257,6 +286,7 @@ const AddANewHouse = () => {
                   Description
                 </label>
                 <textarea
+                  defaultValue={description}
                   id="description"
                   rows="8"
                   name="description"
@@ -270,7 +300,7 @@ const AddANewHouse = () => {
               type="submit"
               className="inline-flex bg-blue-500 items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
             >
-              {addLoading ? "Processing Addedd" : "Add New House"}
+              {addLoading ? "Processing Updated" : "Update House"}
             </button>
           </form>
         </div>
@@ -279,4 +309,4 @@ const AddANewHouse = () => {
   );
 };
 
-export default AddANewHouse;
+export default UpdateHouse;
