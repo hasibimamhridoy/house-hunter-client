@@ -9,6 +9,9 @@ import Login from '../../pages/Home/LoginRegister/Login/Login';
 import About from '../../pages/Home/About/About';
 import Dashboard from '../../pages/Dashboard/Dashboard';
 import DashboardLayout from '../../layouts/MainLayouts/DashboardLayout';
+import MyAddeddHouse from '../../pages/Dashboard/Owner/MyAddeddHouse';
+import AddANewHouse from '../../pages/Dashboard/Owner/AddANewHouse';
+import MenageBookingsOwner from '../../pages/Dashboard/Owner/MenageBookingsOwner';
 
 
 const MainRoutes = createBrowserRouter([
@@ -47,8 +50,16 @@ const MainRoutes = createBrowserRouter([
                 element:<Dashboard></Dashboard>,
             },
             {
-                path:'/dashboard',
-                element:<About></About>
+                path:'/dashboard/my-house',
+                element:<MyAddeddHouse></MyAddeddHouse>
+            },
+            {
+                path:'/dashboard/add-new-house',
+                element:<AddANewHouse></AddANewHouse>
+            },
+            {
+                path:'/dashboard/menage-bookings-owner',
+                element:<MenageBookingsOwner></MenageBookingsOwner>
             },
            
         ]
