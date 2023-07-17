@@ -12,6 +12,8 @@ import DashboardLayout from '../../layouts/MainLayouts/DashboardLayout';
 import MyAddeddHouse from '../../pages/Dashboard/Owner/MyAddeddHouse';
 import AddANewHouse from '../../pages/Dashboard/Owner/AddANewHouse';
 import MenageBookingsOwner from '../../pages/Dashboard/Owner/MenageBookingsOwner';
+import Contact from '../../pages/Contact/Contact';
+import Houses from '../../pages/Houses/Houses';
 
 
 const MainRoutes = createBrowserRouter([
@@ -28,6 +30,10 @@ const MainRoutes = createBrowserRouter([
                 path:'/about',
                 element:<About></About>
             },
+            {
+                path:'/contact',
+                element:<Contact></Contact>
+            },
            
             {
                 path:'/register',
@@ -36,7 +42,11 @@ const MainRoutes = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login></Login>
-            }
+            },
+            {
+                path:'/houses',
+                element:<Houses></Houses>
+            },
         ]
     },
 

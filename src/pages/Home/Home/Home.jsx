@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../authProvider/AuthProvider';
+import Search from './Search';
 
 const Home = () => {
 
@@ -13,6 +14,7 @@ const Home = () => {
     }
     return (
         <div>
+            <Search></Search>
             This is a home
         </div>
     );

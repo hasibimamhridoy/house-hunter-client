@@ -1,5 +1,6 @@
 import { Outlet, useNavigation } from 'react-router-dom';
-import Spinner from '../../components/Spinner/Spinner';
+// import Spinner from '../../components/Spinner/Spinner';
+import Navbar from '../../components/Shared/Navbar/Navbar/Navbar';
 
 
 const MainLayouts = () => {
@@ -10,13 +11,13 @@ const MainLayouts = () => {
    
      if (navigation.state==='loading') {
        console.log(navigation.state === 'loading');
-       return <Spinner></Spinner>;
+       return <div>Loading</div>;
      }
   
     return (
         <div className=' '>
             <div className="mynavbar mx-auto max-w-[1520px] ">
-                This is a navbar
+                <Navbar></Navbar>
             </div>
             <div className="outlet mx-auto max-w-[1520px] lg:h-fit">
                 <Outlet></Outlet>

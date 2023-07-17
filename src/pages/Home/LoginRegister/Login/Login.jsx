@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../../authProvider/AuthProvider";
 
 const Login = () => {
-  const { user,setUser } = useContext(AuthContext);
+  const { user,setUser,setLoading } = useContext(AuthContext);
   console.log( user);
 
   const handleLogin = async (e) => {
@@ -26,6 +26,7 @@ const Login = () => {
           console.log('Login success!', data);
           localStorage.setItem("token",data.access_token)
           setUser({email : data.userEmail})
+          setLoading(false)
 
         } else {
           // Failed login

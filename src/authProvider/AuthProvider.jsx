@@ -4,6 +4,8 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isDark,setIsDark] = useState(false)
+
   const [loading, setLoading] = useState(true);
   // This effect will run only once when the component mounts
   useEffect(() => {
@@ -40,11 +42,18 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const handleDarkMode = ()=>{
+    setIsDark(!isDark)
+  }
+  
+
   const authInfo = {
     user,
     logout,
     setUser,
-    loading
+    loading,
+    isDark,
+    handleDarkMode
   };
 
   return (
