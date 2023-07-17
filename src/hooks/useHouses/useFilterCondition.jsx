@@ -7,7 +7,10 @@ const useFilterCondition = () => {
   const {
     cities,
     how_many_beedrooms,
+    how_many_bathrooms,
     rent_per_month,
+    room_size,
+    is_available,
   } = filterData || {};
 
   const filterConditions = [];
@@ -19,6 +22,15 @@ const useFilterCondition = () => {
   }
   if (how_many_beedrooms?.label) {
     filterConditions.push(`how_many_beedrooms=${filterData?.how_many_beedrooms?.label}`);
+  }
+  if (how_many_bathrooms?.label) {
+    filterConditions.push(`how_many_bathrooms=${filterData?.how_many_bathrooms?.label}`);
+  }
+  if (room_size?.label) {
+    filterConditions.push(`room_size=${filterData?.room_size?.label}`);
+  }
+  if (is_available?.label) {
+    filterConditions.push(`is_available=${filterData?.is_available?.label}`);
   }
 
   if (rent_per_month && rent_per_month.length > 0) {

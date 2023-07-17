@@ -22,15 +22,17 @@ const SidebarFilter = () => {
  /**
   * ---------Local storage item remove when the page manually reloadedd
   */
- useEffect(()=>{
-  window.addEventListener("beforeunload", handleBeforeUnload);
-  return () => {
-    window.removeEventListener("beforeunload", handleBeforeUnload);
-  };
-},[])
-const handleBeforeUnload = () => {
-  localStorage.clear();
-};
+//  useEffect(()=>{
+//   window.addEventListener("beforeunload", handleBeforeUnload);
+//   return () => {
+//     window.removeEventListener("beforeunload", handleBeforeUnload);
+//   };
+// },[])
+
+
+// const handleBeforeUnload = () => {
+//   localStorage.clear();
+// };
 
 
   return (
