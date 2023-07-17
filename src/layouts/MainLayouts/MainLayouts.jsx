@@ -21,9 +21,7 @@ const MainLayouts = () => {
             <div className="outlet mx-auto max-w-[1520px] lg:h-fit">
                 <Outlet></Outlet>
             </div>
-            <div className="footer w-full bg-neutral-900 flex justify-center">
-                Footer
-            </div>
+     
 
         </div>
     );
