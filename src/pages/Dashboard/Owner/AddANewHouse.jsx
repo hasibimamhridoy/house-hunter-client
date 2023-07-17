@@ -48,7 +48,7 @@ const AddANewHouse = () => {
       };
       addHouse(newProduct).then((res) => {
         swal("Good!", "New House Added Succesfully!", "success");
-        form.reset();
+        // form.reset();
         setAddLoading(false);
       });
     });

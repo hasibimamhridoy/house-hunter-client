@@ -1,11 +1,20 @@
 import React from "react";
 import useMyHouses from "../../../hooks/useMyHouses/useMyHouses";
 import { roomsSize } from "../../../datas/GeneralInfo/generalInfo";
+import { deleteToMyHouse } from "../../../api/removeHouse";
+import swal from "sweetalert";
 
 const MyAddedHouse = () => {
   console.log("Kire");
-  const [myHouses] = useMyHouses();
-  console.log("Kire", myHouses);
+  const [myHouses,refetch] = useMyHouses();
+
+  const handelDeleted = (_id)=>{
+    deleteToMyHouse(_id)
+    .then(res=>{
+        swal("Deleted!", "Room has been deleted!", "success");
+        refetch()
+    })
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -71,9 +80,9 @@ const MyAddedHouse = () => {
                     Edit
                   </a>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 cursor-pointer">
                   <a
-                    href="#"
+                    onClick={()=> handelDeleted(_id)}
                     className="font-medium text-red-600 dark:text-blue-500 hover:underline"
                   >
                     Delete
