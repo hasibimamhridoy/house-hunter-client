@@ -26,4 +26,3 @@ const Spinner = () => {
 };
 
 export default Spinner;
-<h1>THis is a spinner</h1>;

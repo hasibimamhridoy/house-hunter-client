@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   // This effect will run only once when the component mounts
   useEffect(() => {
     const token = localStorage.getItem("token"); // Get the token from local storage or wherever you store it
@@ -21,11 +22,13 @@ const AuthProvider = ({ children }) => {
           .then(res=>res.json())
           .then(data =>{
             setUser(data.data)
+            setLoading(false)
           })
     }
 
     else{
         setUser(null)
+        setLoading(false)
     }
 
    
@@ -40,7 +43,8 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     logout,
-    setUser
+    setUser,
+    loading
   };
 
   return (
