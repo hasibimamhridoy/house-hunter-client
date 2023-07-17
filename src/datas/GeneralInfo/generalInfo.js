@@ -72,6 +72,19 @@ export const cities = [
     { label: "5" },
     { label: "6" },
   ];
+  export const roomsSize = [
+    { label: "1200 square feet" },
+    { label: "1500 square feet" },
+    { label: "2000 square feet" },
+    { label: "2500 square feet" },
+    { label: "3000 square feet" },
+  ];
+
+  export const available = [
+    { label: "Yes Available" },
+    { label: "Not Available" },
+
+  ];
 
   export const marks = [
     {
