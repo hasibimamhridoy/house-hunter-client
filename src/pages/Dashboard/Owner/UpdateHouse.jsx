@@ -50,7 +50,6 @@ const UpdateHouse = () => {
 
     imageUpload(image).then((res) => {
       const image = res.data.url;
-
       const updateHouseInformation = {
         house_name,
         house_address,

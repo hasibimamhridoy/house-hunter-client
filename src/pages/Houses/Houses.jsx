@@ -1,5 +1,6 @@
 import React from "react";
 import SidebarFilter from "../../components/SidebarFilter/SidebarFilter/SidebarFilter";
+import AllHouse from "../Home/Home/AllHouse";
 
 const Houses = () => {
   return (
@@ -10,8 +11,9 @@ const Houses = () => {
           <SidebarFilter></SidebarFilter>
         </div>
 
-        <div className="w-full">
+        <div className="w-full mx-3">
           <div className=" lg:p-5 p-1 w-full">Houses</div>
+          <AllHouse></AllHouse>
         </div>
 
       </div>

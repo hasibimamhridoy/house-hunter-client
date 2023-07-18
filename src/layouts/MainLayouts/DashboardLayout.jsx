@@ -14,11 +14,11 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Link, Outlet } from "react-router-dom";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AddIcon from '@mui/icons-material/Add';
-import HouseboatIcon from '@mui/icons-material/Houseboat';
-import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AddIcon from "@mui/icons-material/Add";
+import HouseboatIcon from "@mui/icons-material/Houseboat";
+import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import { AuthContext } from "../../authProvider/AuthProvider";
 
 const drawerWidth = 270;
@@ -27,17 +27,24 @@ function DashboardLayout(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const {user} = React.useContext(AuthContext)
+  const { user,logout } = React.useContext(AuthContext);
   console.log(user);
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+
+  };
+
   const dashMenuItemOwner = [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/",
       icon: <DashboardIcon />,
     },
     {
@@ -61,7 +68,7 @@ function DashboardLayout(props) {
   const dashMenuItemRenter = [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/",
       icon: <DashboardIcon />,
     },
     {
@@ -82,40 +89,49 @@ function DashboardLayout(props) {
       <Toolbar />
       <Divider />
       <List>
-        {user?.role =="House Owner" ? dashMenuItemOwner.map((item) => {
-          return  (
-            <Link to={item.path} key={item.name} >
-            <ListItem  disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
-            </Link>
-          );
-        }) : dashMenuItemRenter.map((item) => {
-            return  (
-              <Link to={item.path} key={item.name} >
-              <ListItem  disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} />
-                </ListItemButton>
-              </ListItem>
-              </Link>
-            );
-          })}
+        {user?.role == "House Owner"
+          ? dashMenuItemOwner.map((item) => {
+              return (
+                <Link to={item.path} key={item.name}>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>{item.icon}</ListItemIcon>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
+              );
+            })
+          : dashMenuItemRenter.map((item) => {
+              return (
+                <Link to={item.path} key={item.name}>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>{item.icon}</ListItemIcon>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
+              );
+            })}
       </List>
+      <ListItem disablePadding>
+        <div onClick={handleLogout}>
+        <ListItemButton>
+          <ListItemIcon></ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItemButton>
+        </div>
+      </ListItem>
     </div>
   );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-
-    if (!user) {
-      return <div>Loading...</div>  
-    }
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -180,17 +196,18 @@ function DashboardLayout(props) {
           {drawer}
         </Drawer>
       </Box>
-     
-     
 
-     <Box
+      <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
       >
         <Toolbar />
         <Outlet></Outlet>
       </Box>
-
     </Box>
   );
 }
