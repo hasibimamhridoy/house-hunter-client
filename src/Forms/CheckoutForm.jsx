@@ -10,6 +10,17 @@ import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/axiousSecure/useAxiosSecure";
 const CheckoutForm = ({ bookingInfo, closeModal }) => {
+
+  const navigate = useNavigate();
+  const stripe = useStripe();
+  const elements = useElements();
+  const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+
   const {
     house_name,
     house_address,
@@ -22,7 +33,7 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     availability_date,
     description,
     photo_url,
-    userInfo,
+    userInfo
   } = bookingInfo;
 
   const finalBookInfo = {
@@ -38,17 +49,9 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     description,
     photo_url,
     userInfo,
+    bookingRenterInfo : user,
   };
 
-  const navigate = useNavigate();
-  const stripe = useStripe();
-  const elements = useElements();
-  const { user } = useAuth();
-  const [axiosSecure] = useAxiosSecure();
-  const [cardError, setCardError] = useState("");
-  const [clientSecret, setClientSecret] = useState("");
-  const [processing, setProcessing] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
 
 
   //   1.  get clientSecret from backend

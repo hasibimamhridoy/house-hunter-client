@@ -39,15 +39,11 @@ const HouseCard = ({ house }) => {
     userInfo,
   } = house;
 
-  console.log(_id);
   if (loading || bookedLoading) {
     return <div>loading</div>;
   }
 
-  // if (enrolledDisabledIds.length === 2) {
-  //   setTwoHouseFullFil(true)
-  // }
-console.log(enrolledDisabledIds);
+
   return (
     <div className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
       <div className="relative mx-4 -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
