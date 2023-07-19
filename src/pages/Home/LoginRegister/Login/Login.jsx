@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../../hooks/useAuth";
+import swal from "sweetalert";
 
 const Login = () => {
   const { user,setUser,setLoading } = useAuth();
-  console.log( user);
   const navigate = useNavigate()
+
+  const [loginError,setLoginError] = useState('')
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,17 +27,17 @@ const Login = () => {
         if (response.ok) {
           // Successful login
           const data = await response.json();
-          console.log('Login success!', data);
           localStorage.setItem("token",data.access_token)
           setUser(data.data)
           setLoading(false)
+          swal("Good!", "Login Succesfully!", "success");
           navigate('/dashboard')
 
 
         } else {
           // Failed login
           const error = await response.json();
-          console.log('Login failed!', error);
+          setLoginError("Provided Valid Email And Password")
         }
       } catch (error) {
         console.error('Error:', error);
@@ -43,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="p-2">
       <form
         onSubmit={handleLogin}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col"
@@ -56,6 +58,7 @@ const Login = () => {
             Email
           </label>
           <input
+          required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
             id="username"
             type="email"
@@ -71,6 +74,7 @@ const Login = () => {
             Password
           </label>
           <input
+          required
             className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
             id="password"
             type="password"
@@ -78,16 +82,17 @@ const Login = () => {
             name="password"
           />
         </div>
-        <div className="flex items-center justify-between">
+        <h1 className="mb-5 text-red-500">{loginError}</h1>
+        <div className="flex flex-col items-center justify-between">
           <button
-            className="bg-blue-400 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-400 w-full hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
             type="submit"
           >
             Sign In
           </button>
           <Link to='/register'>
           <a
-            className="inline-block underline align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+            className="inline-block underline mt-5 align-baseline font-bold text-sm text-blue hover:text-blue-darker"
           >Dont Have A Account ? Create Account
           </a></Link>
         </div>

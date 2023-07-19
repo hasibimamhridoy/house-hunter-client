@@ -7,7 +7,6 @@ const Home = () => {
 
     const {user,loading} = useContext(AuthContext)
 
-    console.log(user);
 
 
     if (loading) {

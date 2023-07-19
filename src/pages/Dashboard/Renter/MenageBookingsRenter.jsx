@@ -6,7 +6,6 @@ import swal from 'sweetalert';
 const MenageBookingsRenter = () => {
 
     const [myBooked,refetch] = useMyBookings()
-    console.log(myBooked);
 
 
     const handelCancle = (_id)=>{

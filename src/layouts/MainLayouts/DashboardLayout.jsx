@@ -21,6 +21,7 @@ import HouseboatIcon from "@mui/icons-material/Houseboat";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import { AuthContext } from "../../authProvider/AuthProvider";
 import useAuth from "../../hooks/useAuth";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 270;
 
@@ -28,18 +29,17 @@ function DashboardLayout(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const { user,logout } = useAuth();
-  console.log(user);
-  const navigate = useNavigate()
+  const { user, logout } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const handleLogout = () => {
-    logout()
-    navigate('/')
-
+    logout();
+    navigate("/");
   };
 
   if (!user) {
@@ -76,7 +76,7 @@ function DashboardLayout(props) {
       path: "/",
       icon: <DashboardIcon />,
     },
-   
+
     {
       name: "Menage Bookings",
       path: "/dashboard/menage-bookings-renter",
@@ -86,7 +86,6 @@ function DashboardLayout(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
       <Divider />
       <List>
         {user?.role == "House Owner"
@@ -116,11 +115,9 @@ function DashboardLayout(props) {
             })}
       </List>
       <ListItem disablePadding>
-        <div onClick={handleLogout}>
-        <ListItemButton>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItemButton>
+        <div onClick={handleLogout} className="w-full flex ml-4 hover:text-red-400 text-gray-700 items-center cursor-pointer">
+          <LogoutIcon></LogoutIcon>
+          <h1 className="ml-4 text-lg ">Logout</h1>
         </div>
       </ListItem>
     </div>
@@ -128,8 +125,6 @@ function DashboardLayout(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
-
 
   return (
     <Box sx={{ display: "flex" }}>

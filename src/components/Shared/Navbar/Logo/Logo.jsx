@@ -8,38 +8,23 @@ const Logo = () => {
 
   return (
     <div>
-      {!isDark && <div>
+      <div>
       <Link to="/">
         <img
           className="w-32 h-14 hidden lg:block"
-          src="https://deendarpartner.com/psilrimt/2023/06/Ass-Sunnah-1.png"
+          src="https://deendarpartner.com/psilrimt/2023/07/House.png"
           alt=""
         />
       </Link>
       <Link to="/">
         <img
           className="w-28 h-10 block lg:hidden"
-          src="https://deendarpartner.com/psilrimt/2023/06/Ass-Sunnah-1.png"
+          src="https://deendarpartner.com/psilrimt/2023/07/House.png"
           alt=""
         />
       </Link>
-      </div>}
-      {isDark && <div>
-      <Link to="/">
-        <img
-          className="w-32 h-14 hidden lg:block"
-          src="https://deendarpartner.com/psilrimt/2023/06/Ass-Sunnah-3.png"
-          alt=""
-        />
-      </Link>
-      <Link to="/">
-        <img
-          className="w-28 h-10 block lg:hidden"
-          src="https://deendarpartner.com/psilrimt/2023/06/Ass-Sunnah-3.png"
-          alt=""
-        />
-      </Link>
-      </div>}
+      </div>
+
     </div>
   );
 };

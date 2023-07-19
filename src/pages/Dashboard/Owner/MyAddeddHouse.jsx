@@ -6,7 +6,6 @@ import swal from "sweetalert";
 import { Link } from "react-router-dom";
 
 const MyAddedHouse = () => {
-  console.log("Kire");
   const [myHouses,refetch] = useMyHouses();
 
   const handelDeleted = (_id)=>{

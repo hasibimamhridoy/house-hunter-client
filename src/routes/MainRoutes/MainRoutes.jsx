@@ -73,7 +73,7 @@ const MainRoutes = createBrowserRouter([
             {
                 path:'/dashboard/update/house/:id',
                 element:<UpdateHouse></UpdateHouse>,
-                loader : ({params})=>fetch(`https://house-hunter-server-production.up.railway.app/single-house/${params.id}`)
+                loader : ({params})=>fetch(`https://house-hunter-server-production.up.railway.app/api/single-house/${params.id}`)
             },
             {
                 path:'/dashboard/menage-bookings-owner',

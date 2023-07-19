@@ -12,7 +12,7 @@ const useMyBookingsHouse = () => {
         enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure(`/my-bookings-house?email=${user?.email}`)
-            console.log(res);
+        
             return res.data;
         },
     })

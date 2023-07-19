@@ -39,7 +39,6 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     status
   } = bookingInfo;
 
-  console.log("house owner house from checkout --------- ",bookingInfo);
 
   const finalBookInfo = {
     house_name,
@@ -79,7 +78,6 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
       axiosSecure
         .post("/create-payment-intent", { price: bookingInfo.rent_per_month })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -103,13 +101,13 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     });
 
     if (error) {
-      console.log("error", error);
+
       setCardError(error.message);
 
       
     } else {
       setCardError("");
-      // console.log('payment method', paymentMethod)
+
     }
 
     setProcessing(true);
@@ -126,11 +124,10 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
       });
 
     if (confirmError) {
-      console.log(confirmError);
       setCardError(confirmError.message);
     }
 
-    console.log("payment intent", paymentIntent);
+
 
     if (paymentIntent.status === "succeeded") {
       // save payment information to the server
@@ -142,7 +139,6 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
         date: new Date(),
       };
       axiosSecure.post("/bookings", paymentInfo).then((res) => {
-        console.log(res.data);
 
         if (res.data.insertedId) {
 
@@ -150,7 +146,6 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
           
 
           setProcessing(false);
-          console.log("from res.data.insertedId-------------",res);
           const text = `Booking Successful!, TransactionId: ${paymentIntent.id}`;
           toast.success(text);
           navigate("/dashboard/menage-bookings-renter");

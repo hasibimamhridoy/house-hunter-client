@@ -7,10 +7,10 @@ const MainLayouts = () => {
      
     const navigation = useNavigation();
     const spinner = navigation.state === 'loading'
-    console.log(spinner);
+
    
      if (navigation.state==='loading') {
-       console.log(navigation.state === 'loading');
+
        return <div>Loading</div>;
      }
   

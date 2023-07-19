@@ -44,31 +44,15 @@ export default function MobileDrawer() {
     >
       <div>
         <ul>
-          
           <Link to="/">
             <li className="bg-gray-100 text-center p-2 mx-2 rounded-sm mt-3">
               Home
             </li>
           </Link>
-          <Link to="/instructors">
-            <li className="bg-gray-100 text-center p-2 mx-2 rounded-sm mt-3">
-              Instructors
-            </li>
-          </Link>
 
-          <Link to="/classes">
-            <li className="bg-gray-100 text-center p-2 mx-2 rounded-sm mt-3">
-              Classess
-            </li>
-          </Link>
           <Link to="/about">
             <li className="bg-gray-100 text-center p-2 mx-2 rounded-sm mt-3">
               About
-            </li>
-          </Link>
-          <Link to="/contact">
-            <li className="bg-gray-100 text-center p-2 mx-2 rounded-sm mt-3">
-              Contact
             </li>
           </Link>
 
@@ -87,11 +71,7 @@ export default function MobileDrawer() {
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button sx={{ color: "gray" }} onClick={toggleDrawer(anchor, true)}>
-            {user ? (
-              <img className="h-10 w-10 rounded-full" src={user.photoURL}></img>
-            ) : (
-              <MenuIcon></MenuIcon>
-            )}
+            <MenuIcon></MenuIcon>
           </Button>
 
           <SwipeableDrawer

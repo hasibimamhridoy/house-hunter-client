@@ -7,33 +7,17 @@ import { FilterContext } from "../../../stateManagement/FilterProvider/FilterPro
 import { LOADING } from "../../../stateManagement/FilterProvider/ActionName";
 import useHouses from "../../../hooks/useHouses/useHouses";
 
-const SidebarFilter = () => {
+const SidebarFilter = ({ closeModal }) => {
   const { refetch } = useHouses();
-  const {dispatch} = useContext(FilterContext)
+  const { dispatch } = useContext(FilterContext);
 
   const handleFilter = () => {
-    dispatch({type : LOADING, payload : true})
-    refetch().then(()=>{
-      dispatch({type : LOADING, payload : false})
+    dispatch({ type: LOADING, payload: true });
+    refetch().then(() => {
+      dispatch({ type: LOADING, payload: false });
+      closeModal();
     });
-    
   };
-
- /**
-  * ---------Local storage item remove when the page manually reloadedd
-  */
-//  useEffect(()=>{
-//   window.addEventListener("beforeunload", handleBeforeUnload);
-//   return () => {
-//     window.removeEventListener("beforeunload", handleBeforeUnload);
-//   };
-// },[])
-
-
-// const handleBeforeUnload = () => {
-//   localStorage.clear();
-// };
-
 
   return (
     <div>
@@ -43,9 +27,12 @@ const SidebarFilter = () => {
          */}
         <GenarelInformtaion></GenarelInformtaion>
 
-        <button onClick={handleFilter} className="px-3 py-1 bg-green-400 my-5">
+
+        <button onClick={handleFilter} className="px-3 w-full rounded-md py-1 bg-blue-500 text-white my-5">
           Search
         </button>
+
+        
       </div>
     </div>
   );

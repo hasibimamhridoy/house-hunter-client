@@ -12,7 +12,6 @@ const queryClient = new QueryClient();
 const FilterProvider = ({ children }) => {
   const [filterData, dispatch] = useReducer(filterReducer, initialFilterState);
 
-  console.log(filterData);
 
   const filterInfo = {
     filterData,

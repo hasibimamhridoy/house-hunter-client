@@ -7,6 +7,7 @@ import DarkMode from "../DarkMode/DarkMode";
 import MobileDrawer from "../MobileDrawer/MobileDrawer";
 import { useContext } from "react";
 import { AuthContext } from "../../../../authProvider/AuthProvider";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const ProfileItems = () => {
   const { user , isDark } = useContext(AuthContext);
@@ -14,7 +15,6 @@ const ProfileItems = () => {
   const isAdmin = true;
   const isBookedClass = false
 
-  console.log(user);
 
   return (
     <div>
@@ -34,7 +34,7 @@ const ProfileItems = () => {
 
             <Link to="/dashboard" className="lg:hidden mb-1">
               <Avatar sx={{ bgcolor: "#00ADEF" }}>
-                <img src={user?.photoURL} alt="" />
+              <MenuIcon></MenuIcon>
               </Avatar>
             </Link>
           </div>

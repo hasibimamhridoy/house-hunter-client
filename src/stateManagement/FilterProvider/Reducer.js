@@ -11,8 +11,8 @@ export const initialFilterState = {
     how_many_bathrooms : "",
     room_size : "",
     is_available : "",
-    page : "",
-    limit : 5,
+    page : parseInt(0),
+    limit : parseInt(5),
     rent_per_month : [1000,2500],
 }
 

@@ -6,7 +6,7 @@ import useAuth from '../useAuth';
 const useMyBookings = () => {
     const { user, loading } = useAuth();
 
-    console.log(user);
+ 
 
     const [axiosSecure] = useAxiosSecure();
     const { refetch, data: myBooked = [] } = useQuery({
@@ -14,7 +14,6 @@ const useMyBookings = () => {
         enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure(`/my-get-bookings/${user?.email}`)
-            console.log(res);
             return res.data;
         },
     })

@@ -3,11 +3,29 @@ import axios from "axios";
 import useFilterCondition from "./useFilterCondition";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../axiousSecure/useAxiosSecure";
+import { useContext } from "react";
+import { FilterContext } from "../../stateManagement/FilterProvider/FilterProvider";
 
 
 const useHouses = () => {
  
+  const {filterData} = useContext(FilterContext)
+
   const query = useFilterCondition()
+  
+  const {
+    cities,
+    how_many_beedrooms,
+    how_many_bathrooms,
+    rent_per_month,
+    room_size,
+    is_available,
+    page,
+    limit,
+  } = filterData || {};
+
+
+  console.log('use housees------',query);
 
   const [axiosSecure] = useAxiosSecure()
 

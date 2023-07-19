@@ -12,7 +12,7 @@ const useMyHouses = () => {
         enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure(`/my-house?email=${user?.email}`)
-            console.log(res);
+         
             return res.data;
         },
     })

@@ -12,11 +12,11 @@ import swal from "sweetalert";
 const AddANewHouse = () => {
   const { user, loading } = useAuth();
 
-
   const [addLoading, setAddLoading] = useState(false);
   const handleAddHouse = (e) => {
-    setAddLoading(true);
     e.preventDefault();
+    setAddLoading(true);
+
     const form = e.target;
     const house_name = form.name.value;
     const house_address = form.address.value;
@@ -30,32 +30,34 @@ const AddANewHouse = () => {
     const description = form.description.value;
     const image = e.target.image.files[0];
 
-    imageUpload(image).then((res) => {
-      const image = res.data.url;
+    imageUpload(image)
+      .then((res) => {
+        const image = res.data.url;
 
-      const newProduct = {
-        house_name,
-        house_address,
-        house_city,
-        rent_per_month,
-        house_room_size,
-        house_bedRoom,
-        house_bathRoom,
-        phone_number,
-        availability_date,
-        description,
-        photo_url: image,
-        userInfo: user,
-        status : "Available"
-      };
-      addHouse(newProduct).then((res) => {
-        swal("Good!", "New House Added Succesfully!", "success");
-        // form.reset();
+        const newProduct = {
+          house_name,
+          house_address,
+          house_city,
+          rent_per_month,
+          house_room_size,
+          house_bedRoom,
+          house_bathRoom,
+          phone_number,
+          availability_date,
+          description,
+          photo_url: image,
+          userInfo: user,
+          status: "Available",
+        };
+        addHouse(newProduct).then((res) => {
+          swal("Good!", "New House Added Succesfully!", "success");
+          // form.reset();
+          setAddLoading(false);
+        });
+      })
+      .catch((err) => {
         setAddLoading(false);
       });
-    }).catch(err=>{
-      setAddLoading(false)
-    });
   };
 
   return (
@@ -80,7 +82,7 @@ const AddANewHouse = () => {
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type House name"
-                  required=""
+                  required
                 />
               </div>
               <div className="w-full">
@@ -96,7 +98,7 @@ const AddANewHouse = () => {
                   id="address"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="House address"
-                  required=""
+                  required
                 />
               </div>
 
@@ -110,9 +112,9 @@ const AddANewHouse = () => {
                 <select
                   id="city"
                   name="city"
+                  required
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected="">Select city</option>
                   {citiesData.map((city) => (
                     <option key={city.label} value={city.label}>
                       {city.label}
@@ -129,12 +131,12 @@ const AddANewHouse = () => {
                   Rent Per Month
                 </label>
                 <input
+                  required
                   type="number"
                   name="price"
                   id="price"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Tk. 2000"
-                  required=""
                 />
               </div>
 
@@ -146,11 +148,11 @@ const AddANewHouse = () => {
                   Room Size
                 </label>
                 <select
+                  required
                   id="roomSize"
                   name="roomSize"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected="">Select Room Size</option>
                   {roomsSize.map((roomsSize) => (
                     <option key={roomsSize.label} value={roomsSize.label}>
                       {roomsSize.label}
@@ -167,11 +169,11 @@ const AddANewHouse = () => {
                   Bed Room
                 </label>
                 <select
+                  required
                   id="bedRoom"
                   name="bedRoom"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected="">Select Bed Room</option>
                   {bedrooms.map((bedrooms) => (
                     <option key={bedrooms.label} value={bedrooms.label}>
                       {bedrooms.label}
@@ -187,11 +189,11 @@ const AddANewHouse = () => {
                   Bath Room
                 </label>
                 <select
+                  required
                   id="BathRoom"
                   name="bathRoom"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
-                  <option selected="">Select Bed Room</option>
                   {bedrooms.map((bedrooms) => (
                     <option key={bedrooms.label} value={bedrooms.label}>
                       {bedrooms.label}
@@ -208,13 +210,13 @@ const AddANewHouse = () => {
                   Phone Number
                 </label>
                 <input
+                  required
                   type="tel"
                   name="phone"
                   id="phone"
                   pattern="^01[3-9][0-9]{8}$"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="+8801706831927"
-                  required
                 />
               </div>
 
@@ -226,6 +228,7 @@ const AddANewHouse = () => {
                   Upload House Image
                 </label>
                 <input
+                  required
                   name="image"
                   className="block p-2 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   aria-describedby="houseImage_help"
@@ -248,7 +251,7 @@ const AddANewHouse = () => {
                   id="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="+8801706831927"
-                  required=""
+                  required
                 />
               </div>
 
@@ -260,6 +263,7 @@ const AddANewHouse = () => {
                   Description
                 </label>
                 <textarea
+                  required
                   id="description"
                   rows="8"
                   name="description"

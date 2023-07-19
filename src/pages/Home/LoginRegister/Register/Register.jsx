@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../../authProvider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const Register = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const navigate = useNavigate()
+  const [registerError,setRegisterError] = useState('')
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -15,7 +16,6 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(role,name);
 
     try {
       const response = await fetch("https://house-hunter-server-production.up.railway.app/api/users/signup", {
@@ -29,15 +29,17 @@ const Register = () => {
       if (response.ok) {
         // Successful Register
         const data = await response.json();
-        console.log("Register success!", data);
-        localStorage.setItem("token", data.access_token);
+        
+        if (data.message === 'User Already Exists') {
+          return swal("Error!", "Already have an account in this Email. Please Try Another Email", "error")
+          
+        }
+        swal("Good!", "Register Succesfully! Please Login Now!", "success");
         navigate("/login")
 
       } else {
         // Failed Register
         const error = await response.json();
-        console.log("Register failed!", error);
-        // Handle failed Register logic here
       }
     } catch (error) {
       console.error("Error:", error);
@@ -46,7 +48,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex p-2 justify-center items-center">
       <form
         onSubmit={handleRegister}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col lg:w-2/4 w-full"
@@ -64,6 +66,7 @@ const Register = () => {
             type="text"
             placeholder="Full Name"
             name="name"
+            required
           />
         </div>
 
@@ -76,6 +79,7 @@ const Register = () => {
           </label>
           <select
             name="role"
+            required
             id="countries"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
@@ -93,6 +97,7 @@ const Register = () => {
             Phone Number
           </label>
           <input
+          required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
             id="phoneNumber"
             type="number"
@@ -109,6 +114,7 @@ const Register = () => {
             Email
           </label>
           <input
+          required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
             id="username"
             type="email"
@@ -124,6 +130,7 @@ const Register = () => {
             Password
           </label>
           <input
+          required
             className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
             id="password"
             type="password"
@@ -138,7 +145,9 @@ const Register = () => {
           >
             Register
           </button>
+          
         </div>
+        <Link to='/login'><h1 className="mt-5 underline">Already Have An Account?</h1></Link>
       </form>
     </div>
   );

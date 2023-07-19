@@ -3,7 +3,7 @@ import { updateHouseFn } from "../../../api/updateHouse";
 import swal from "sweetalert";
 import useAuth from "../../../hooks/useAuth";
 import { imageUpload } from "../../../api/imageUpload";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import {
   bedrooms,
   citiesData,
@@ -13,7 +13,6 @@ import {
 const UpdateHouse = () => {
   const { user, loading } = useAuth();
   const updateHouse = useLoaderData();
-  console.log(updateHouse);
   const {
     _id,
     house_name,
@@ -31,6 +30,7 @@ const UpdateHouse = () => {
   } = updateHouse;
 
   const [addLoading, setAddLoading] = useState(false);
+  const navigate = useNavigate()
 
   const handleUpdateHouse = (e) => {
     setAddLoading(true);
@@ -65,10 +65,10 @@ const UpdateHouse = () => {
         userInfo: user,
         status : "Available"
       };
-      console.log(_id);
       updateHouseFn(_id, updateHouseInformation).then((res) => {
         swal("Good!", "House Updated Succesfully!", "success");
         // form.reset();
+        navigate('/dashboard/my-house')
         setAddLoading(false);
       });
     });
@@ -79,7 +79,7 @@ const UpdateHouse = () => {
       <section className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-2xl lg:py-5">
           <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-            Add a new House
+            Update House
           </h2>
           <form onSubmit={handleUpdateHouse}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">

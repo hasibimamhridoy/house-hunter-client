@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Search = () => {
   return (
     <Link to='/houses'>
-    <htmlForm className="flex items-center w-2/4 mx-auto">
+    <htmlForm className="flex items-center w-2/4 mx-auto mt-5">
       <label htmlFor="simple-search" className="sr-only">
         Search
       </label>

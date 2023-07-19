@@ -24,7 +24,6 @@ const AuthProvider = ({ children }) => {
           .then(res=>res.json())
           .then(data =>{
             setUser(data.data)
-            console.log("data from auth ------- ",data.data);
             setLoading(false)
           })
       

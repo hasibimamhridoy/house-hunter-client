@@ -6,7 +6,7 @@ const MenageBookingsOwner = () => {
 
     const [myBookings] = useMyBookingsHouse()
 
-    console.log(myBookings);
+
 
 
     return (
