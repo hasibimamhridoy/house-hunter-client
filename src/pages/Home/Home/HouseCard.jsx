@@ -3,6 +3,7 @@ import BookingModal from "../../../Modal/BookingModal";
 import { isAlreadyBooked } from "../../../api/isAlreadyBooked";
 import useAuth from "../../../hooks/useAuth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const HouseCard = ({ house }) => {
   const { user, loading } = useAuth();
@@ -41,7 +42,9 @@ const HouseCard = ({ house }) => {
   } = house;
 
   if (loading) {
-    return <div>loading</div>;
+    return <div className="h-screen flex justify-center items-center">
+      <Spinner></Spinner>
+      </div>;
   }
 
   return (

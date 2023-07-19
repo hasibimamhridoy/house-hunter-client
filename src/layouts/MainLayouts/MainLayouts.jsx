@@ -1,6 +1,7 @@
 import { Outlet, useNavigation } from 'react-router-dom';
 // import Spinner from '../../components/Spinner/Spinner';
 import Navbar from '../../components/Shared/Navbar/Navbar/Navbar';
+import Spinner from '../../components/Spinner/Spinner';
 
 
 const MainLayouts = () => {
@@ -11,7 +12,9 @@ const MainLayouts = () => {
    
      if (navigation.state==='loading') {
 
-       return <div>Loading</div>;
+       return <div className="h-screen flex justify-center items-center">
+       <Spinner></Spinner>
+       </div>;
      }
   
     return (

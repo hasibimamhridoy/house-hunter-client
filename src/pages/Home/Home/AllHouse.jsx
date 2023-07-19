@@ -5,6 +5,7 @@ import { FilterContext } from "../../../stateManagement/FilterProvider/FilterPro
 import { PAGE_PAGI } from "../../../stateManagement/FilterProvider/ActionName";
 import useHousesCount from "../../../hooks/useHouses/useHousesCount";
 import useAxiosSecure from "../../../hooks/axiousSecure/useAxiosSecure";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const AllHouse = () => {
   const { filterData, dispatch } = useContext(FilterContext);
@@ -28,7 +29,9 @@ const AllHouse = () => {
 
 
   if (isLoading || filterData.loading || btnLoading) {
-    return <div>Loading..........</div>;
+    return <div className="h-screen flex justify-center items-center">
+      <Spinner></Spinner>
+      </div>;
   }
 
 console.log(houses);

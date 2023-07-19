@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useMyHouses from "../../hooks/useMyHouses/useMyHouses";
 import useMyBookingsHouse from "../../hooks/useMyBookingsHouse/useMyBookingsHouse";
 import useMyBookings from "../../hooks/useMyBookings/useMyBookings";
+import Spinner from "../../components/Spinner/Spinner";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -12,7 +13,9 @@ const Dashboard = () => {
   const [myBooked, refetch] = useMyBookings();
 
   if (!user) {
-    return <div>Loading.....</div>;
+    return <div className="h-screen flex justify-center items-center">
+      <Spinner></Spinner>
+      </div>;
   }
 
   return (
