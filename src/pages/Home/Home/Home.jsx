@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../authProvider/AuthProvider';
 import Search from './Search';
 import AllHouse from './AllHouse';
+import BannerSlider from '../Banner/BannerSlider/BannerSlider';
 
 const Home = () => {
 
@@ -14,6 +15,7 @@ const Home = () => {
     }
     return (
         <div>
+            <BannerSlider></BannerSlider>
             <Search></Search>
             <div className='my-5'>
             <AllHouse></AllHouse>
