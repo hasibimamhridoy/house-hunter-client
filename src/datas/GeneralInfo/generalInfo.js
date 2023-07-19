@@ -1,4 +1,4 @@
-export const cities = [
+export const citiesData = [
   { label: 'Dhaka' },
   { label: 'Faridpur' },
   { label: 'Gazipur' },
@@ -81,8 +81,8 @@ export const cities = [
   ];
 
   export const available = [
-    { label: "Yes Available" },
-    { label: "Not Available" },
+    { label: "Yes Available",value: "Available" },
+    { label: "Not Available",value: "Booked" },
 
   ];
 

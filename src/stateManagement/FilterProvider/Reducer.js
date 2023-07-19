@@ -1,6 +1,6 @@
 //initial state
 
-import { CITIES,BED_ROOMS,PER_RENT,LOADING, BATH_ROOMS, ROOM_SIZE, IS_AVAILABLE } from "./ActionName"
+import { CITIES,BED_ROOMS,PER_RENT,LOADING, BATH_ROOMS, ROOM_SIZE, IS_AVAILABLE, PAGE_PAGI, LIMIT_PAGI } from "./ActionName"
 
 
 
@@ -11,7 +11,9 @@ export const initialFilterState = {
     how_many_bathrooms : "",
     room_size : "",
     is_available : "",
-    rent_per_month : [],
+    page : "",
+    limit : 5,
+    rent_per_month : [1000,2500],
 }
 
 
@@ -47,6 +49,16 @@ export const filterReducer = (state,actions)=>{
         return {
             ...state,
             rent_per_month : actions.payload
+        }
+        case PAGE_PAGI:
+        return {
+            ...state,
+            page : actions.payload
+        }
+        case LIMIT_PAGI:
+        return {
+            ...state,
+            limit : actions.payload
         }
      
         case LOADING:

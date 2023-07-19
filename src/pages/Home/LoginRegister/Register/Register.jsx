@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../../authProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
+  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ const Register = () => {
         const data = await response.json();
         console.log("Register success!", data);
         localStorage.setItem("token", data.access_token);
+        navigate("/login")
 
       } else {
         // Failed Register
@@ -127,7 +130,6 @@ const Register = () => {
             placeholder="********"
             name="password"
           />
-          <p className="text-red text-xs italic">Please choose a password.</p>
         </div>
         <div className="flex items-center justify-between">
           <button

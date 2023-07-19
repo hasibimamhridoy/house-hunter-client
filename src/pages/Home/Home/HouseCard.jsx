@@ -19,9 +19,9 @@ const HouseCard = ({ house }) => {
   useEffect(() => {
     isAlreadyBooked(user?.email).then((res) => {
       setEnrolledDisabledIds(res);
-      setBookedLoading(false)
+      setBookedLoading(false);
     });
-  }, [user?.email,selectedValue]);
+  }, [user?.email, selectedValue]);
 
   const {
     _id,
@@ -37,9 +37,10 @@ const HouseCard = ({ house }) => {
     description,
     photo_url,
     userInfo,
+    status,
   } = house;
 
-  if (loading || bookedLoading) {
+  if (loading ) {
     return <div>loading</div>;
   }
 
@@ -54,10 +55,16 @@ const HouseCard = ({ house }) => {
           className="w-full h-full"
         />
       </div>
+
       <div className="p-6">
+        <h1 className={` ${status === 'Booked' ? "bg-red-400" : "bg-green-400"} mb-3 inline-flex text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded`}>
+          {status}
+        </h1>
+
         <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
           {house_name}
         </h5>
+
         <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
           {description}
         </p>
@@ -71,24 +78,27 @@ const HouseCard = ({ house }) => {
         <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
           {availability_date} Availability Date
         </span>
-
       </div>
 
       <div className="p-6 pt-0">
-        {!enrolledDisabledIds.includes(String(_id)) && <button
-          onClick={() => setIsOpen(true)}
-          className="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          type="button"
-          data-ripple-light="true"
-          disabled={enrolledDisabledIds.includes(_id) || enrolledDisabledIds.length === 2}
-        >
-         
-
-          {((!enrolledDisabledIds.includes(_id)) & enrolledDisabledIds.length === 2) ? "Cant Added Above two" : "Booked Now"}
-
-        </button>}
-        
-
+        {!enrolledDisabledIds.includes(String(_id)) && (
+          <button
+            onClick={() => setIsOpen(true)}
+            className="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+            data-ripple-light="true"
+            disabled={
+              enrolledDisabledIds.includes(_id) ||
+              enrolledDisabledIds.length === 2 ||
+              user?.role === "House Owner" || status === 'Booked'
+            }
+          >
+            {!enrolledDisabledIds.includes(_id) &
+            (enrolledDisabledIds.length === 2)
+              ? "Cant Added Above two"
+              : "Booked Now"}
+          </button>
+        )}
 
         {enrolledDisabledIds.includes(_id) && (
           <Link to="/dashboard/menage-bookings-renter">
@@ -102,14 +112,11 @@ const HouseCard = ({ house }) => {
           </Link>
         )}
 
-
-
         <BookingModal
           bookingInfo={house}
           isOpen={isOpen}
           closeModal={closeModal}
         />
-
       </div>
     </div>
   );

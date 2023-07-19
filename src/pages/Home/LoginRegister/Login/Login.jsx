@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../../../authProvider/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../../hooks/useAuth";
 
 const Login = () => {
-  const { user,setUser,setLoading } = useContext(AuthContext);
+  const { user,setUser,setLoading } = useAuth();
   console.log( user);
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,8 +27,10 @@ const Login = () => {
           const data = await response.json();
           console.log('Login success!', data);
           localStorage.setItem("token",data.access_token)
-          setUser({email : data.userEmail})
+          setUser(data.data)
           setLoading(false)
+          navigate('/dashboard')
+
 
         } else {
           // Failed login
@@ -73,7 +77,6 @@ const Login = () => {
             placeholder="********"
             name="password"
           />
-          <p className="text-red text-xs italic">Please choose a password.</p>
         </div>
         <div className="flex items-center justify-between">
           <button
@@ -82,12 +85,11 @@ const Login = () => {
           >
             Sign In
           </button>
+          <Link to='/register'>
           <a
-            className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
-            href="#"
-          >
-            Forgot Password?
-          </a>
+            className="inline-block underline align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+          >Dont Have A Account ? Create Account
+          </a></Link>
         </div>
       </form>
     </div>

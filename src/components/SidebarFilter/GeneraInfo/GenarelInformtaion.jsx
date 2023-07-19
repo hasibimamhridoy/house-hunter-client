@@ -10,12 +10,12 @@ import React, { useContext, useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FilterContext } from "../../../stateManagement/FilterProvider/FilterProvider";
 import { CITIES, PER_RENT , BED_ROOMS, BATH_ROOMS, ROOM_SIZE, IS_AVAILABLE } from "../../../stateManagement/FilterProvider/ActionName";
-import { cities, bedrooms, marks, roomsSize, available } from "../../../datas/GeneralInfo/generalInfo";
+import { citiesData, bedrooms, marks, roomsSize, available } from "../../../datas/GeneralInfo/generalInfo";
 
 
 const GenarelInformtaion = () => {
 
-  const { dispatch } = useContext(FilterContext);
+  const { dispatch,filterData } = useContext(FilterContext);
   const [selectedcities, setSelectedcities] = useState(null);
   const [selectedBedRooms, setSelectedBedRooms] = useState(null);
   const [selectedBathRooms, setSelectedBathRooms] = useState(null);
@@ -24,76 +24,7 @@ const GenarelInformtaion = () => {
   const [RentPerMonth, setRentPerMonth] = useState([1000, 2500]);
   const [expanded, setExpanded] = useState(false);
 
-
-  /**
-   * _________Retrive the local storage data to set default value
-   */
-  useEffect(() => {
-    const savedcities = localStorage.getItem("selectedcities");
-    if (savedcities) {
-      setSelectedcities(JSON.parse(savedcities));
-    }
-
-    const savedBedRooms = localStorage.getItem("selectedBedRooms");
-    if (savedBedRooms) {
-      setSelectedBedRooms(JSON.parse(savedBedRooms));
-    }
-    const savedBathRooms = localStorage.getItem("selectedBathRooms");
-    if (savedBedRooms) {
-      setSelectedBedRooms(JSON.parse(savedBathRooms));
-    }
-    const savedselectedRoomSize = localStorage.getItem("selectedRoomSize");
-    if (savedselectedRoomSize) {
-      setSelectedBedRooms(JSON.parse(savedselectedRoomSize));
-    }
-    const savedselectedAvailable = localStorage.getItem("selectedAvailable");
-    if (savedselectedAvailable) {
-      setSelectedAvailable(JSON.parse(savedselectedAvailable));
-    }
-
-    const savedAge = localStorage.getItem("RentPerMonth");
-    if (savedAge) {
-      setRentPerMonth(JSON.parse(savedAge));
-    }
-
-    const storedExpanded = localStorage.getItem("generalAccordionExpanded");
-    if (storedExpanded) {
-      setExpanded(JSON.parse(storedExpanded));
-    }
-
-  }, []);
-
-
-
-  useEffect(() => {
-    // Save selected values to local storage
-    localStorage.setItem("selectedcities", JSON.stringify(selectedcities));
-  }, [selectedcities]);
-
-  useEffect(() => {
-    // Save selected values to local storage
-    localStorage.setItem("selectedBedRooms", JSON.stringify(selectedBedRooms));
-  }, [selectedBedRooms]);
-
-  useEffect(() => {
-    // Save selected values to local storage
-    localStorage.setItem("selectedBathRooms", JSON.stringify(selectedBathRooms));
-  }, [selectedBathRooms]);
-  useEffect(() => {
-    // Save selected values to local storage
-    localStorage.setItem("selectedRoomSize", JSON.stringify(selectedRoomSize));
-  }, [selectedRoomSize]);
-
-  useEffect(() => {
-    // Save selected values to local storage
-    localStorage.setItem("selectedAvailable", JSON.stringify(selectedAvailable));
-  }, [selectedAvailable]);
-
-  useEffect(() => {
-    // Save selected values to local storage
-    localStorage.setItem("RentPerMonth", JSON.stringify(RentPerMonth));
-  }, [RentPerMonth]);
-
+  const {cities,how_many_bathrooms,how_many_beedrooms,room_size,rent_per_month} = filterData
 
   useEffect(() => {
     const storedExpanded = localStorage.getItem("generalAccordionExpanded");
@@ -131,9 +62,9 @@ const GenarelInformtaion = () => {
                 dispatch({ type: CITIES, payload: value });
               }}
               id="combo-box-demo"
-              options={cities}
+              options={citiesData}
               sx={{ width: '100%' }}
-              value={selectedcities}
+              value={cities}
               renderInput={(params) => (
                 <TextField variant="outlined" {...params} label="Which Area ?" />
               )}
@@ -146,7 +77,7 @@ const GenarelInformtaion = () => {
               }}
               id="combo-box-demo"
               options={bedrooms}
-              value={selectedBedRooms}
+              value={how_many_beedrooms}
               sx={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField
@@ -164,7 +95,7 @@ const GenarelInformtaion = () => {
               }}
               id="combo-box-demo"
               options={bedrooms}
-              value={selectedBathRooms}
+              value={how_many_bathrooms}
               sx={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField
@@ -201,7 +132,7 @@ const GenarelInformtaion = () => {
               }}
               id="combo-box-demo"
               options={roomsSize}
-              value={selectedRoomSize}
+              value={room_size}
               sx={{ width: "100%" }}
               renderInput={(params) => (
                 <TextField
@@ -222,7 +153,7 @@ const GenarelInformtaion = () => {
                   getAriaLabel={() => "Temperature"}
                   orientation="horizontal"
                   // getAriaValueText={valuetext}
-                  value={RentPerMonth}
+                  value={rent_per_month}
                   valueLabelDisplay="auto"
                   onChange={(event, value) => {
                     setRentPerMonth(value);

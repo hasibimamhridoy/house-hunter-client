@@ -5,18 +5,16 @@ import { AuthContext } from "../authProvider/AuthProvider";
 const useAuth = () => {
     
     const {
-      user,
       logout,
-      setUser,
+      user,setUser,setLoading ,
       loading,
       isDark,
       handleDarkMode
       } = useContext(AuthContext);
       
     return {
-      user,
       logout,
-      setUser,
+      user,setUser,setLoading ,
       loading,
       isDark,
       handleDarkMode

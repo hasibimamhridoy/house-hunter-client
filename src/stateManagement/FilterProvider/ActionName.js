@@ -4,5 +4,7 @@ export const BATH_ROOMS = "BATH_ROOMS"
 export const ROOM_SIZE = "ROOM_SIZE"
 export const IS_AVAILABLE = "IS_AVAILABLE"
 export const PER_RENT = "PER_RENT"
+export const PAGE_PAGI = "PAGE_PAGI"
+export const LIMIT_PAGI = "LIMIT_PAGI"
 
 export const LOADING = "LOADING"

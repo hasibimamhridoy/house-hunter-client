@@ -20,6 +20,7 @@ import AddIcon from "@mui/icons-material/Add";
 import HouseboatIcon from "@mui/icons-material/Houseboat";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import { AuthContext } from "../../authProvider/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 const drawerWidth = 270;
 
@@ -27,7 +28,7 @@ function DashboardLayout(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const { user,logout } = React.useContext(AuthContext);
+  const { user,logout } = useAuth();
   console.log(user);
   const navigate = useNavigate()
 
@@ -40,6 +41,10 @@ function DashboardLayout(props) {
     navigate('/')
 
   };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   const dashMenuItemOwner = [
     {
@@ -71,12 +76,7 @@ function DashboardLayout(props) {
       path: "/",
       icon: <DashboardIcon />,
     },
-    {
-      name: "My Booked House",
-      path: "/dashboard/my--booked-house",
-      icon: <HouseboatIcon></HouseboatIcon>,
-    },
-
+   
     {
       name: "Menage Bookings",
       path: "/dashboard/menage-bookings-renter",
@@ -129,9 +129,7 @@ function DashboardLayout(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+
 
   return (
     <Box sx={{ display: "flex" }}>

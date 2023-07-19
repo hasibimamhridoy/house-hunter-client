@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   bedrooms,
-  cities,
+  citiesData,
   roomsSize,
 } from "../../../datas/GeneralInfo/generalInfo";
 import useAuth from "../../../hooks/useAuth";
@@ -21,7 +21,7 @@ const AddANewHouse = () => {
     const house_name = form.name.value;
     const house_address = form.address.value;
     const house_city = form.city.value;
-    const rent_per_month = form.price.value;
+    const rent_per_month = parseInt(form.price.value);
     const house_room_size = form.roomSize.value;
     const house_bedRoom = form.bedRoom.value;
     const house_bathRoom = form.bathRoom.value;
@@ -46,12 +46,15 @@ const AddANewHouse = () => {
         description,
         photo_url: image,
         userInfo: user,
+        status : "Available"
       };
       addHouse(newProduct).then((res) => {
         swal("Good!", "New House Added Succesfully!", "success");
         // form.reset();
         setAddLoading(false);
       });
+    }).catch(err=>{
+      setAddLoading(false)
     });
   };
 
@@ -110,7 +113,7 @@ const AddANewHouse = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
                   <option selected="">Select city</option>
-                  {cities.map((city) => (
+                  {citiesData.map((city) => (
                     <option key={city.label} value={city.label}>
                       {city.label}
                     </option>

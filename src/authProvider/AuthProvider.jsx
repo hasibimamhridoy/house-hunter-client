@@ -6,10 +6,10 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isDark,setIsDark] = useState(false)
 
+
   const [loading, setLoading] = useState(true);
-  // This effect will run only once when the component mounts
   useEffect(() => {
-    const token = localStorage.getItem("token"); // Get the token from local storage or wherever you store it
+    const token = localStorage.getItem("token");
     // Check if the token exists and is valid
     if (token) {
       
@@ -24,8 +24,10 @@ const AuthProvider = ({ children }) => {
           .then(res=>res.json())
           .then(data =>{
             setUser(data.data)
+            console.log("data from auth ------- ",data.data);
             setLoading(false)
           })
+      
     }
 
     else{
@@ -37,7 +39,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = () => {
-    // Remove the token from local storage or wherever you stored it
     localStorage.removeItem("token");
     setUser(null);
   };
@@ -53,6 +54,7 @@ const AuthProvider = ({ children }) => {
     setUser,
     loading,
     isDark,
+    setLoading,
     handleDarkMode
   };
 

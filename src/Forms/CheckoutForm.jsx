@@ -9,6 +9,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/axiousSecure/useAxiosSecure";
+import { updateHouseFn } from "../api/updateHouse";
 const CheckoutForm = ({ bookingInfo, closeModal }) => {
 
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
   const [transactionId, setTransactionId] = useState("");
 
   const {
+    _id,
     house_name,
     house_address,
     house_city,
@@ -33,8 +35,11 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     availability_date,
     description,
     photo_url,
-    userInfo
+    userInfo,
+    status
   } = bookingInfo;
+
+  console.log("house owner house from checkout --------- ",bookingInfo);
 
   const finalBookInfo = {
     house_name,
@@ -52,6 +57,21 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
     bookingRenterInfo : user,
   };
 
+  const updateBookedStatusInfo = {
+    house_name,
+    house_address,
+    house_city,
+    rent_per_month,
+    house_room_size,
+    house_bedRoom,
+    house_bathRoom,
+    phone_number,
+    availability_date,
+    description,
+    photo_url,
+    userInfo,
+    status : "Booked"
+  }
 
   //   1.  get clientSecret from backend
   useEffect(() => {
@@ -125,6 +145,10 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
         console.log(res.data);
 
         if (res.data.insertedId) {
+
+          updateHouseFn(bookingInfo._id,updateBookedStatusInfo)
+          
+
           setProcessing(false);
           console.log("from res.data.insertedId-------------",res);
           const text = `Booking Successful!, TransactionId: ${paymentIntent.id}`;

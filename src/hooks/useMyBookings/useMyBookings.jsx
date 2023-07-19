@@ -6,6 +6,8 @@ import useAuth from '../useAuth';
 const useMyBookings = () => {
     const { user, loading } = useAuth();
 
+    console.log(user);
+
     const [axiosSecure] = useAxiosSecure();
     const { refetch, data: myBookings = [] } = useQuery({
         queryKey: ['useMyBookings', user?.email],

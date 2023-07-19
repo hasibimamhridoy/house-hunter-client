@@ -11,6 +11,8 @@ const useFilterCondition = () => {
     rent_per_month,
     room_size,
     is_available,
+    page,
+    limit
   } = filterData || {};
 
   const filterConditions = [];
@@ -29,8 +31,15 @@ const useFilterCondition = () => {
   if (room_size?.label) {
     filterConditions.push(`room_size=${filterData?.room_size?.label}`);
   }
-  if (is_available?.label) {
-    filterConditions.push(`is_available=${filterData?.is_available?.label}`);
+  if (is_available?.value) {
+    filterConditions.push(`is_available=${filterData?.is_available?.value}`);
+  }
+
+  if (page) {
+    filterConditions.push(`page=${page}`);
+  }
+  if (limit) {
+    filterConditions.push(`limit=${limit}`);
   }
 
   if (rent_per_month && rent_per_month.length > 0) {
