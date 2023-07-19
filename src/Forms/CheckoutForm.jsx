@@ -53,7 +53,6 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
   };
 
 
-
   //   1.  get clientSecret from backend
   useEffect(() => {
     if (bookingInfo.rent_per_month > 0) {
