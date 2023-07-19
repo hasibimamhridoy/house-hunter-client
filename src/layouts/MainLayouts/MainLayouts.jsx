@@ -2,6 +2,7 @@ import { Outlet, useNavigation } from 'react-router-dom';
 // import Spinner from '../../components/Spinner/Spinner';
 import Navbar from '../../components/Shared/Navbar/Navbar/Navbar';
 import Spinner from '../../components/Spinner/Spinner';
+import Footer from '../../components/Shared/Footer/Footer/Footer';
 
 
 const MainLayouts = () => {
@@ -25,6 +26,8 @@ const MainLayouts = () => {
             <div className="outlet mx-auto max-w-[1520px] lg:h-fit">
                 <Outlet></Outlet>
             </div>
+
+            <Footer></Footer>
      
 
         </div>

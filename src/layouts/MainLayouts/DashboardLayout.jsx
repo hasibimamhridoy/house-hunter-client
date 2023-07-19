@@ -22,6 +22,7 @@ import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import { AuthContext } from "../../authProvider/AuthProvider";
 import useAuth from "../../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Spinner from "../../components/Spinner/Spinner";
 
 const drawerWidth = 270;
 
@@ -43,7 +44,9 @@ function DashboardLayout(props) {
   };
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div className="h-screen flex justify-center items-center">
+      <Spinner></Spinner>
+      </div>;
   }
 
   const dashMenuItemOwner = [
