@@ -10,11 +10,7 @@ import { AuthContext } from "../../../../authProvider/AuthProvider";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const ProfileItems = () => {
-  const { user , isDark } = useContext(AuthContext);
-  const isInstructor = false
-  const isAdmin = true;
-  const isBookedClass = false
-
+  const { user  } = useContext(AuthContext);
 
   return (
     <div>
@@ -26,7 +22,7 @@ const ProfileItems = () => {
             <Link className="hidden lg:block" to="/dashboard">
               <button
                 type="button"
-                className="text-white bg-[#00ADEF] hover:transition hover:duration-500 cursor-pointer hover:bg-[#183f8cde] rounded-full text-sm px-3 py-1 text-center mb-2"
+                className="text-white bg-blue-500 hover:transition hover:duration-500 cursor-pointer hover:bg-[#183f8cde] rounded-full text-sm px-3 py-1 text-center mb-2"
               >
                 Dashboard
               </button>
@@ -44,7 +40,7 @@ const ProfileItems = () => {
             <Link to="/login">
             <button
               type="button"
-              className="text-white bg-[#00ADEF] rounded-full text-sm px-3 py-1 text-center mr-2 mb-0.5"
+              className="text-white bg-blue-500 rounded-full text-sm px-3 py-1 text-center mr-2"
             >
               Login
             </button>
