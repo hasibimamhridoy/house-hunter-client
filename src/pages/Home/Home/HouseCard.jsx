@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BookingModal from "../../../Modal/BookingModal";
 import { isAlreadyBooked } from "../../../api/isAlreadyBooked";
 import useAuth from "../../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const HouseCard = ({ house }) => {
   const { user, loading } = useAuth();
@@ -10,7 +10,7 @@ const HouseCard = ({ house }) => {
   const [twoHouseFullFil, setTwoHouseFullFil] = useState(false);
   const [selectedValue, setSelectedValue] = useState(user?.email);
   const [bookedLoading, setBookedLoading] = useState(true);
-
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
     setIsOpen(false);
@@ -40,10 +40,9 @@ const HouseCard = ({ house }) => {
     status,
   } = house;
 
-  if (loading ) {
+  if (loading) {
     return <div>loading</div>;
   }
-
 
   return (
     <div className="relative flex w-full flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
@@ -57,7 +56,11 @@ const HouseCard = ({ house }) => {
       </div>
 
       <div className="p-6">
-        <h1 className={` ${status === 'Booked' ? "bg-red-400" : "bg-green-400"} mb-3 inline-flex text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded`}>
+        <h1
+          className={` ${
+            status === "Booked" ? "bg-red-400" : "bg-green-400"
+          } mb-3 inline-flex text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded`}
+        >
           {status}
         </h1>
 
@@ -83,14 +86,20 @@ const HouseCard = ({ house }) => {
       <div className="p-6 pt-0">
         {!enrolledDisabledIds.includes(String(_id)) && (
           <button
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              if (!user) {
+                return navigate("/login");
+              }
+              setIsOpen(true);
+            }}
             className="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
             data-ripple-light="true"
             disabled={
               enrolledDisabledIds.includes(_id) ||
               enrolledDisabledIds.length === 2 ||
-              user?.role === "House Owner" || status === 'Booked'
+              user?.role === "House Owner" ||
+              status === "Booked"
             }
           >
             {!enrolledDisabledIds.includes(_id) &

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../authProvider/AuthProvider';
 import Search from './Search';
+import AllHouse from './AllHouse';
 
 const Home = () => {
 
@@ -15,7 +16,9 @@ const Home = () => {
     return (
         <div>
             <Search></Search>
-            This is a home
+            <div className='my-5'>
+            <AllHouse></AllHouse>
+            </div>
         </div>
     );
 };

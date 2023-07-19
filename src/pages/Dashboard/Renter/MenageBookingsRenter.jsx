@@ -5,8 +5,8 @@ import swal from 'sweetalert';
 
 const MenageBookingsRenter = () => {
 
-    const [myBookings,refetch] = useMyBookings()
-    console.log(myBookings);
+    const [myBooked,refetch] = useMyBookings()
+    console.log(myBooked);
 
 
     const handelCancle = (_id)=>{
@@ -44,7 +44,7 @@ const MenageBookingsRenter = () => {
           </tr>
         </thead>
         <tbody>
-          {myBookings.map((house) => {
+          {myBooked.map((house) => {
             const {
               _id,
               house_name,

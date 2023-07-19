@@ -18,7 +18,7 @@ const Register = () => {
     console.log(role,name);
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/signup", {
+      const response = await fetch("https://house-hunter-server-production.up.railway.app/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

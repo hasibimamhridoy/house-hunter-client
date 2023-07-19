@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import CheckoutForm from "../Forms/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import useAuth from "../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_KEY);
 
 const BookingModal = ({ closeModal, isOpen, bookingInfo }) => {
@@ -25,6 +26,9 @@ const BookingModal = ({ closeModal, isOpen, bookingInfo }) => {
     photo_url,
     userInfo,
   } = bookingInfo;
+
+
+
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

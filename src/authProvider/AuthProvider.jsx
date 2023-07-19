@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
     // Check if the token exists and is valid
     if (token) {
       
-        fetch('http://localhost:5000/api/users/onAuthStateChanged', {
+        fetch('https://house-hunter-server-production.up.railway.app/api/users/onAuthStateChanged', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

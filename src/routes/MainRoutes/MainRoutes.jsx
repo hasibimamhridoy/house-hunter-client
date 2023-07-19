@@ -16,6 +16,7 @@ import Contact from '../../pages/Contact/Contact';
 import Houses from '../../pages/Houses/Houses';
 import UpdateHouse from '../../pages/Dashboard/Owner/updateHouse';
 import MenageBookingsRenter from '../../pages/Dashboard/Renter/MenageBookingsRenter';
+import PrivateRoutes from './PrivateRoutes';
 
 
 const MainRoutes = createBrowserRouter([
@@ -54,7 +55,7 @@ const MainRoutes = createBrowserRouter([
 
     {
         path:'/dashboard',
-        element:<DashboardLayout></DashboardLayout>,
+        element:<PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
         errorElement:<Error></Error>,
         children:[
             {
@@ -72,7 +73,7 @@ const MainRoutes = createBrowserRouter([
             {
                 path:'/dashboard/update/house/:id',
                 element:<UpdateHouse></UpdateHouse>,
-                loader : ({params})=>fetch(`http://localhost:5000/api/single-house/${params.id}`)
+                loader : ({params})=>fetch(`https://house-hunter-server-production.up.railway.app/single-house/${params.id}`)
             },
             {
                 path:'/dashboard/menage-bookings-owner',

@@ -3,23 +3,21 @@ import { useQuery } from '@tanstack/react-query'
 import useAxiosSecure from '../axiousSecure/useAxiosSecure';
 import useAuth from '../useAuth';
 
-const useMyBookings = () => {
+const useMyBookingsHouse = () => {
     const { user, loading } = useAuth();
 
-    console.log(user);
-
     const [axiosSecure] = useAxiosSecure();
-    const { refetch, data: myBooked = [] } = useQuery({
-        queryKey: ['useMyBookings', user?.email],
+    const { refetch, data: myBookings = [] } = useQuery({
+        queryKey: ['myBookings', user?.email],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure(`/my-get-bookings/${user?.email}`)
+            const res = await axiosSecure(`/my-bookings-house?email=${user?.email}`)
             console.log(res);
             return res.data;
         },
     })
 
-    return [myBooked, refetch]
+    return [myBookings, refetch]
 
 }
-export default useMyBookings;
+export default useMyBookingsHouse;

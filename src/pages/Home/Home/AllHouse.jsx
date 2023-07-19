@@ -10,6 +10,7 @@ const AllHouse = () => {
     const { filterData, dispatch } = useContext(FilterContext);
   const { houses, isLoading, refetch } = useHouses()
 
+  const [btnLoading,setBtnLoading] = useState(true)
   const { housesCount} = useHousesCount()
   const [currentPage, setCurrentPage] = useState(0);
   const pages = parseInt(Math.ceil(housesCount / 5));
@@ -19,20 +20,23 @@ const AllHouse = () => {
   }
 
   const handlePreviousPage = () => {
-    if (currentPage == 0) {
+    if (currentPage === 0) {
       setCurrentPage(0);
     } else {
       setCurrentPage(currentPage - 1);
     }
-    refetch()
+    refetch();
+    setBtnLoading(false)
   };
+  
   const handleNextPage = () => {
-    if (currentPage == Math.max(...pageButton)) {
-      setCurrentPage(Math.max(...pageButton));
+    if (currentPage === pages - 1) {
+      setCurrentPage(pages - 1);
     } else {
       setCurrentPage(currentPage + 1);
     }
-    refetch()
+    refetch();
+    setBtnLoading(false)
   };
 
 
@@ -40,13 +44,14 @@ const AllHouse = () => {
   useEffect(() => {
     dispatch({ type: PAGE_PAGI, payload: currentPage });
     refetch()
+    setBtnLoading(false)
   }, [currentPage, dispatch,refetch]);
 
 
   console.log(filterData);
 
 
-    if (isLoading || filterData.loading) {
+    if (isLoading || filterData.loading || btnLoading) {
         return <div>Loading..........</div>
     }
 
@@ -75,15 +80,20 @@ const AllHouse = () => {
                 </li>
 
                 {pageButton.map((btn) => {
+                    const pageNumber = btn + 1;
                   return (
-                    <li onClick={() => setCurrentPage(btn)} key={btn}>
+                    <li onClick={() => {
+                        setCurrentPage(btn)
+                        setBtnLoading(true)
+                      
+                    }} key={btn}>
                       <a
                         className={`px-3 py-2 leading-tight text-gray-500 border dark:bg-gray-800 cursor-pointer dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
-                          currentPage === btn &&
+                          currentPage === btn&&
                           "bg-purple-700 text-white border-none hover:bg-purple-700 border border-white hover:text-white"
                         }`}
                       >
-                        {btn}
+                       {pageNumber}
                       </a>
                     </li>
                   );
