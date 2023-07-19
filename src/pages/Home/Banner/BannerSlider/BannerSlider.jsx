@@ -14,20 +14,13 @@ import bannerTwo from "../../../../assets/banner/6.png"
 import bannerThree from "../../../../assets/banner/7.png"
 import bannerFour from "../../../../assets/banner/8.png"
 
-// import required modules
-// import { Pagination } from "swiper";
-
 const BannerSlider = () => {
   
   return (
     <div  className="mb-20 mt-10">
       <div className=" lg:h-[80vh]">
       <Swiper
-        // pagination={{
-        //   type: "fraction",
-        // }}
-        // navigation={true}
-        // modules={[Pagination]}
+
         className="mySwiper"
       >
         <SwiperSlide>

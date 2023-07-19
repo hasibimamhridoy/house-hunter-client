@@ -3,6 +3,7 @@ import { AuthContext } from '../../../authProvider/AuthProvider';
 import Search from './Search';
 import AllHouse from './AllHouse';
 import BannerSlider from '../Banner/BannerSlider/BannerSlider';
+import HeroSection from '../HeroSection/HeroSection';
 
 const Home = () => {
 
@@ -20,6 +21,7 @@ const Home = () => {
             <div className='my-5'>
             <AllHouse></AllHouse>
             </div>
+            <HeroSection></HeroSection>
         </div>
     );
 };
