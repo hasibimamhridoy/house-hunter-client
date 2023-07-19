@@ -1,6 +1,6 @@
 # house-hunter-client
 ## Live Link
-Hosted in Netlify -> [Ass Sunnah School](https://house-hunter-h.netlify.app/)
+Hosted in Netlify -> [House Hunter](https://house-hunter-h.netlify.app/)
 
 
 <div align="center">
