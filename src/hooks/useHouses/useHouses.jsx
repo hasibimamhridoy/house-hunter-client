@@ -25,7 +25,6 @@ const useHouses = () => {
   } = filterData || {};
 
 
-  console.log('use housees------',query);
 
   const [axiosSecure] = useAxiosSecure()
 

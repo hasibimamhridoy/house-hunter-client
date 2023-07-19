@@ -3,7 +3,6 @@ import { FilterContext } from "../../stateManagement/FilterProvider/FilterProvid
 
 const useFilterCondition = () => {
   const { filterData } = useContext(FilterContext);
-  console.log("from conditon filter data---", filterData);
   const {
     cities,
     how_many_beedrooms,
@@ -17,7 +16,7 @@ const useFilterCondition = () => {
 
   const filterConditions = [];
 
-  console.log("page----", page);
+
 
   if (page) {
     filterConditions.push(`page=${page}`);
@@ -54,7 +53,6 @@ const useFilterCondition = () => {
   const query =
     filterConditions.length > 0 ? `?${filterConditions?.join("&")}` : "";
 
-  console.log(query);
 
   return query;
 };

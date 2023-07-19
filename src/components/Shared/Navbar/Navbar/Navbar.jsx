@@ -6,7 +6,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="h-[4.8rem] flex items-center justify-between">
+    <div className="h-[4.8rem] flex items-center shadow-sm justify-between">
       <Logo></Logo>
       <MenuItems></MenuItems>
       <ProfileItems></ProfileItems>

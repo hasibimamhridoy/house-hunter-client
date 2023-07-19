@@ -1,29 +1,44 @@
-import { Outlet, useNavigation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigation } from 'react-router-dom';
 // import Spinner from '../../components/Spinner/Spinner';
 import Navbar from '../../components/Shared/Navbar/Navbar/Navbar';
 import Spinner from '../../components/Spinner/Spinner';
 import Footer from '../../components/Shared/Footer/Footer/Footer';
+import { useEffect } from 'react';
 
 
 const MainLayouts = () => {
-     
+
+    const loc = useLocation();
     const navigation = useNavigation();
-    const spinner = navigation.state === 'loading'
 
+     useEffect(() => {
+        if (loc.pathname == "/login") {
+          document.title = "House Hunter - LOGIN";
+        } else if (loc.pathname === "/") {
+          document.title = "House Hunter - Home";
+        } else {
+          document.title = `House Hunter ${loc.pathname.toUpperCase()}`.replace(
+            "/",
+            "-"
+          );
+        }
+      }, [loc.pathname, loc.state]);
+
+
+      if (navigation.state==='loading') {
+
+        return <div className="h-screen flex justify-center items-center">
+        <Spinner></Spinner>
+        </div>;
+      }
    
-     if (navigation.state==='loading') {
 
-       return <div className="h-screen flex justify-center items-center">
-       <Spinner></Spinner>
-       </div>;
-     }
-  
     return (
         <div className=' '>
-            <div className="mynavbar mx-auto max-w-[1520px] ">
+            <div className="mynavbar mx-auto max-w-[1220px] ">
                 <Navbar></Navbar>
             </div>
-            <div className="outlet mx-auto max-w-[1520px] lg:h-fit">
+            <div className="outlet mx-auto max-w-[1220px] lg:h-fit">
                 <Outlet></Outlet>
             </div>
 

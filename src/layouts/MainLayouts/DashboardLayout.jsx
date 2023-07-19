@@ -23,6 +23,7 @@ import { AuthContext } from "../../authProvider/AuthProvider";
 import useAuth from "../../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Spinner from "../../components/Spinner/Spinner";
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 270;
 
@@ -51,8 +52,13 @@ function DashboardLayout(props) {
 
   const dashMenuItemOwner = [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/",
+      icon: <HomeIcon></HomeIcon>,
+    },
+    {
+      name: "Dashboard",
+      path: "/dashboard",
       icon: <DashboardIcon />,
     },
     {
@@ -71,12 +77,18 @@ function DashboardLayout(props) {
       path: "/dashboard/menage-bookings-owner",
       icon: <ManageHistoryIcon></ManageHistoryIcon>,
     },
+    
   ];
 
   const dashMenuItemRenter = [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/",
+      icon: <HomeIcon></HomeIcon>,
+    },
+    {
+      name: "Dashboard",
+      path: "/dashboard",
       icon: <DashboardIcon />,
     },
 

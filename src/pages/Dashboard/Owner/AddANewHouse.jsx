@@ -8,9 +8,11 @@ import useAuth from "../../../hooks/useAuth";
 import { imageUpload } from "../../../api/imageUpload";
 import { addHouse } from "../../../api/addHouse";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const AddANewHouse = () => {
   const { user, loading } = useAuth();
+  const navigate = useNavigate()
 
   const [addLoading, setAddLoading] = useState(false);
   const handleAddHouse = (e) => {
@@ -51,7 +53,8 @@ const AddANewHouse = () => {
         };
         addHouse(newProduct).then((res) => {
           swal("Good!", "New House Added Succesfully!", "success");
-          // form.reset();
+          form.reset();
+          navigate("/dashboard/my-house")
           setAddLoading(false);
         });
       })
