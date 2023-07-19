@@ -46,7 +46,7 @@ Hosted in Netlify -> [Ass Sunnah School](https://house-hunter-h.netlify.app/)
 
 - create a footer hero section for user who cant register in our website.
 
-- 
+- I make the website full responsive (Laptop,mobile,tablet,pc)
 
 
 ## Used packages and technology

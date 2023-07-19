@@ -59,7 +59,7 @@ const AllHouse = () => {
                   <a
                     className={`px-3 py-2 leading-tight text-gray-500 border dark:bg-gray-800 cursor-pointer dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
                       currentPage === btn &&
-                      "bg-purple-700 text-white border-none hover:bg-purple-700 border border-white hover:text-white"
+                      "bg-blue-500 text-white border-none hover:bg-blue-700 border border-white hover:text-white"
                     }`}
                   >
                     {btn}

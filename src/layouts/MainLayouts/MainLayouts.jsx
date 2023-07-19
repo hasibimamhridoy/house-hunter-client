@@ -35,7 +35,7 @@ const MainLayouts = () => {
 
     return (
         <div className=' '>
-            <div className="mynavbar mx-auto max-w-[1220px] ">
+            <div className="mynavbar mx-auto max-w-[1220px] px-3 lg:px-0 ">
                 <Navbar></Navbar>
             </div>
             <div className="outlet mx-auto max-w-[1220px] lg:h-fit">

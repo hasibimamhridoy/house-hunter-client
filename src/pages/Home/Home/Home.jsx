@@ -16,7 +16,7 @@ const Home = () => {
     }
     return (
         <div>
-            <BannerSlider></BannerSlider>
+            <div className='px-3 lg:px-0'><BannerSlider></BannerSlider></div>
             <Search></Search>
             <div className='my-5'>
             <AllHouse></AllHouse>
